@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class EntrenamientoNadadora {
+    // Constantes para los límites del número de largos y del número de intentos
+    private static final int MIN_LARGOS = 0;
+    private static final int MAX_LARGOS = 50;
+    private static final int MAX_INTENTOS = 3;
+
+    public static void main(String[] args) {
+        // Crear objeto Scanner para leer la entrada del usuario
+        Scanner sc = new Scanner(System.in);
+
+        // Variables para almacenar el número de largos y el número de intentos
+        int numLargos = 0;
+        int numIntentos = 0;
+
+        // Pedir al usuario que introduzca el número de largos
+        while (numIntentos < MAX_INTENTOS) {
+            System.out.print("Introduzca el número de largos (entre " + MIN_LARGOS + " y " + MAX_LARGOS + "): ");
+            numLargos = sc.nextInt();
+
+            if (numLargos >= MIN_LARGOS && numLargos <= MAX_LARGOS) {
+                break; // Salir del bucle si se ha introducido un número válido
+            } else {
+                numIntentos++;
+                if (numIntentos == MAX_INTENTOS) {
+                    System.out.println("Número máximo de intentos alcanzado. Saliendo del programa.");
+                    return;
+                } else {
+                    System.out.println("El número introducido no está en el rango permitido. Por favor, inténtelo de nuevo.");
+                }
+            }
+        }
+
+        // Componer la cadena de caracteres con los largos realizados
+        StringBuilder sb = new StringBuilder("{ ");
+        for (int i = 1; i <= numLargos; i++) {
+            if (i % 4 == 1 || i % 4 == 2) {
+                sb.append("Crol");
+            } else if (i % 4 == 3) {
+                sb.append("Braza");
+            } else {
+                sb.append("Espalda");
+            }
+
+            // Añadir un espacio al final de cada palabra, excepto en el último largo
+            if (i < numLargos) {
+                sb.append(" ");
+            }
+        }
+        sb.append(" }");
+
+        // Mostrar la cadena de caracteres resultante
+        System.out.println("Largos realizados: " + sb.toString());
+    }
+}
